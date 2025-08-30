@@ -2,7 +2,7 @@ package gg.jte.generated.precompiled;
 @SuppressWarnings("unchecked")
 public final class JtelayoutGenerated {
 	public static final String JTE_NAME = "layout.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,0,0,0,12,12,12,14,14,15,15,15,16,16,21,21,21,24,24,24,0,1,1,1,1};
+	public static final int[] JTE_LINE_INFO = {0,0,0,0,0,12,12,12,14,14,15,15,15,16,16,21,21,21,25,25,25,0,1,1,1,1};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, String title, gg.jte.Content content) {
 		jteOutput.writeContent("\n<!doctype html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.css\">\n    <link rel=\"stylesheet\" href=\"/style.css\">\n    <script src=\"/script.js\" defer></script>\n    <title>\n        ");
 		if (title == null) {
@@ -16,7 +16,7 @@ public final class JtelayoutGenerated {
 		jteOutput.writeContent("\n    </title>\n</head>\n<body>\n<main>\n    ");
 		jteOutput.setContext("main", null);
 		jteOutput.writeUserContent(content);
-		jteOutput.writeContent("\n</main>\n</body>\n</html>");
+		jteOutput.writeContent("\n    <a href=\"https://www.digitalocean.com/?refcode=db830bd58f8d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge\"><img src=\"https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%203.svg\" alt=\"DigitalOcean Referral Badge\" /></a>\n</main>\n</body>\n</html>");
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		String title = (String)params.getOrDefault("title", null);

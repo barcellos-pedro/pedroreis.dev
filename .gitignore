@@ -24,4 +24,4 @@ hs_err_pid*
 replay_pid*
 
 # Database
-storage/database.sqlite
+storage/*.sqlite
