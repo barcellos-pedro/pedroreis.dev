@@ -36,3 +36,11 @@ echo "JAR uploaded [OK]"
 echo "Uploading Database (sqlite)..."
 scp storage/database.db  root@$SERVER_IP:/root/storage/database.db
 echo "Database uploaded [OK]"
+
+# Start app with nohup
+# nohup → stands for “no hangup" it ignores the SIGHUP signal sent when terminal closes
+#
+# - `> app.log` → redirects standard output to a file.
+# - `2>&1 → redirects standard error to the same file.
+# - `&` → runs it in the background.
+nohup java -jar dev-1.0.0.jar > app.log 2>&1 &
