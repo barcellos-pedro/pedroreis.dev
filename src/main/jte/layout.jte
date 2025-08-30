@@ -11,9 +11,9 @@
     <script src="/script.js" defer></script>
     <title>
         @if (title == null)
-            Pedro Barcellos | Portfolio
+            pedroreis.dev
         @else
-            ${title} | Portfolio
+            ${title}
         @endif
     </title>
 </head>
