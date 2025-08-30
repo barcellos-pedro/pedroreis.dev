@@ -25,3 +25,7 @@ replay_pid*
 
 # Database
 /storage/**/*.sqlite
+/storage/**/*.db
+
+# Build folder
+target/
