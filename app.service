@@ -1,0 +1,13 @@
+[Unit]
+Description=Spring Boot Github Profile Web App
+After=network.target
+
+[Service]
+User=root
+ExecStart=java -jar dev-1.0.0.jar.jar
+SuccessExitStatus=143
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
