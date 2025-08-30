@@ -4,12 +4,12 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public final class JtehomeGenerated {
 	public static final String JTE_NAME = "home.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,2,2,2,4,4,6,6,55,55,55,55,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,57,57,57,59,59,59,61,61,64,64,64,66,66,66,2,2,2,2};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,2,2,2,4,4,6,6,18,18,18,18,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,20,20,20,22,22,22,24,24,27,27,27,29,29,29,2,2,2,2};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, List<Link> links) {
 		jteOutput.writeContent("\n");
 		gg.jte.generated.precompiled.JtelayoutGenerated.render(jteOutput, jteHtmlInterceptor, "Home", new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\n    <style>\n        .bio {\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            justify-content:center;\n            height: 100vh;\n            \n            img {\n                width:112px;\n                height:112px;\n                border-radius: 50%;\n            }\n            \n            h3 {\n                margin-top: 0px;\n                text-align: center;\n            \n                p {\n                    margin-bottom: 0.5em;\n                    font-weight: bold;\n                    margin-top: 2em;\n                }\n                p:nth-of-type(2) {\n                    margin-top: 0;\n                    font-weight: 300;\n                }\n            }\n\n            .links {\n                display:flex;\n                gap:3em;\n                align-items:center;\n            }\n        }\n    </style>\n\n    <div class=\"bio\">\n        <img src=\"https://avatars.githubusercontent.com/u/33139500?v=4\" alt=\"Pedro's profile image\">\n\n        <h3>\n            <p>Pedro Barcellos dos Reis</p>\n            <p>Software Engineer</p>\n        </h3>\n\n        <a href=\"/projects\">Check out my Portfolio Overview &rarr;</a>\n\n        <section class=\"links\">\n            ");
+				jteOutput.writeContent("\n    <div class=\"bio\">\n        <img src=\"https://avatars.githubusercontent.com/u/33139500?v=4\" alt=\"Pedro's profile image\">\n\n        <h3>\n            <p>Pedro Barcellos dos Reis</p>\n            <p>Software Engineer</p>\n        </h3>\n\n        <a href=\"/projects\">Check out my Portfolio Overview &rarr;</a>\n\n        <section class=\"links\">\n            ");
 				boolean __jte_for_loop_entered_1 = false;
 				for (var link : links) {
 					__jte_for_loop_entered_1 = true;
