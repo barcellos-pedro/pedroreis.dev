@@ -6,8 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/simple.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/public/simple.css">
+    <link rel="stylesheet" href="/public/style.css">
     <script src="/script.js" defer></script>
     <title>
         @if (title == null)
