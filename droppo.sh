@@ -1,46 +1,69 @@
 #!/bin/bash
 
 # ------------------------------------------------------------
-# This script automates building and deploying a Java project.
-#
-# Steps:
-# 1. Validates that a server IP argument is provided.
-# 2. Uses Maven to package the project into a JAR file.
-# 3. Uploads the generated JAR to the remote server via `scp`.
-# 4. Uploads the SQLite database file to the server as well.
-#
-# Handy for quick deployments in development or testing
-# environments where a simple JAR + SQLite setup is enough.
+# Automated build & deploy script for Java + SQLite project
+# Uses latest JAR automatically and a dedicated workdir structure
 # ------------------------------------------------------------
 
-# Check for server ip argument
-if [ -z "$1" ]; then
-  echo "Error: No server IP provided."
-  echo "Usage: $0 <server_ip>"
+SCRIPT=$0
+
+# Check arguments
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Usage: $SCRIPT <server_ip> <ssh_private_key>"
   exit 1
 fi
 
 SERVER_IP=$1
+KEY=$2
+WORKDIR="/root/app"           # Base workdir on the server
+LOGDIR="$WORKDIR/logs"        # Logs folder
+STORAGEDIR="$WORKDIR/storage" # SQLite folder
 
-# Build & Package the project using Maven
-echo "Packaging project..."
+# Function to check command exit status
+check_success() {
+  if [ $1 -ne 0 ]; then
+    echo "❌ Error: $2"
+    exit 1
+  fi
+}
+
+# 1️⃣ Build & Package locally
+echo "📦 Packaging project..."
 mvn clean package -q
-echo "Project packaged [OK]"
+check_success $? "Maven build failed."
+echo "✅ Project packaged"
 
-# Upload the JAR to the remote server
-echo "Uploading JAR..."
-scp target/dev-1.0.0.jar root@$SERVER_IP:/root/
-echo "JAR uploaded [OK]"
+# 2️⃣ Find the latest JAR in target/
+LATEST_JAR=$(ls -t target/*.jar 2>/dev/null | head -n 1)
+if [ -z "$LATEST_JAR" ]; then
+  echo "❌ No JAR found in target/ folder."
+  exit 1
+fi
+echo "📝 Latest JAR detected: $LATEST_JAR"
 
-# Upload the SQLite database file to the remote server
-echo "Uploading Database (sqlite)..."
-scp storage/database.db  root@$SERVER_IP:/root/storage/database.db
-echo "Database uploaded [OK]"
+# 3️⃣ Upload JAR and SQLite DB in one go using rsync
+echo "🚀 Uploading files..."
+rsync -avz -e "ssh -i $KEY" "$LATEST_JAR" storage/database.db root@$SERVER_IP:$WORKDIR/
+check_success $? "Failed to upload files."
+echo "✅ Files uploaded"
 
-# Start app with nohup
-# nohup → stands for “no hangup" it ignores the SIGHUP signal sent when terminal closes
-#
-# - `> app.log` → redirects standard output to a file.
-# - `2>&1 → redirects standard error to the same file.
-# - `&` → runs it in the background.
-nohup java -jar dev-1.0.0.jar > app.log 2>&1 &
+# 4️⃣ Run remote commands in one SSH session
+echo "▶️ Preparing remote directories and starting app..."
+
+ssh -i "$KEY" root@$SERVER_IP << EOF
+# Ensure workdir structure exists
+mkdir -p "$WORKDIR"
+mkdir -p "$LOGDIR"
+mkdir -p "$STORAGEDIR"
+
+# Move SQLite database to storage folder
+mv "$WORKDIR/database.db" "$STORAGEDIR/" 2>/dev/null || true
+
+# Start the app with nohup, redirecting logs
+nohup java -jar "$WORKDIR/$(basename $LATEST_JAR)" > "$LOGDIR/app.log" 2>&1 &
+EOF
+
+check_success $? "Failed to run remote commands."
+
+echo "✅ Remote setup and app start completed"
+echo "🎉 Deployment completed successfully!"
