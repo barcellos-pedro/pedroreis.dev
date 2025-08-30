@@ -3,11 +3,11 @@ package com.barcellospedro.web;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,16 +23,10 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String view(Model model) {
-        model.addAttribute("text", "home page is working!");
-        return "index";
-    }
+    public String githubUser(HttpServletRequest request, Model model) {
+        var totalVisits = db.queryForObject("SELECT count(*) FROM visits", String.class);
 
-    @GetMapping("/user/{userName}")
-    public String githubUser(HttpServletRequest request, Model model, @PathVariable String userName) {
-        var totalVisits = db.queryForObject("SELECT count(*) FROM visits", Integer.class);
-
-        String userAgent = request.getHeader("User-Agent");
+        String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
         String path = request.getRequestURI();
         String ipAddress = request.getRemoteAddr();
 
@@ -43,14 +37,13 @@ public class IndexController {
 
         model.mergeAttributes(Map.of(
                 "avatarUrl", "https://avatars.githubusercontent.com/u/33139500?v=4",
-                "visits", totalVisits.toString(),
-                "userName", userName
+                "visits", totalVisits
         ));
 
         db.update("INSERT INTO visits (ip_address, user_agent, page_path) VALUES (?, ?, ?)",
                 ipAddress, userAgent, path);
 
-        return "user";
+        return "home";
     }
 
     private static String getCurrentDateTime() {
