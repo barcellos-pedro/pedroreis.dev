@@ -15,7 +15,7 @@ fi
 
 SERVER_IP=$1
 KEY=$2
-DB_PATH=storage/database.db
+DB_PATH=database.db
 
 check_success() {
   if [ $1 -ne 0 ]; then
