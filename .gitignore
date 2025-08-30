@@ -29,3 +29,15 @@ replay_pid*
 
 # Build folder
 target/
+
+# Logs
+*.log
+
+# Maven
+mvnw
+mvnw.cmd
+
+# IDEs
+web.iml
+.idea
+.vscode
