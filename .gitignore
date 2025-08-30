@@ -24,8 +24,8 @@ hs_err_pid*
 replay_pid*
 
 # Database
-/storage/**/*.sqlite
-/storage/**/*.db
+/**/*.sqlite
+/**/*.db
 
 # Build folder
 target/
