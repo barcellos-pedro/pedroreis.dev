@@ -1,5 +1,3 @@
-@param String title = null
-@param gg.jte.Content content
 
 <!doctype html>
 <html lang="en">
@@ -10,16 +8,16 @@
     <link rel="stylesheet" href="/style.css">
     <script src="/script.js" defer></script>
     <title>
-        @if (title == null)
+        
             Pedro Barcellos | Portfolio
-        @else
-            ${title} | Portfolio
-        @endif
+        
+             | Portfolio
+        
     </title>
 </head>
 <body>
 <main>
-    ${content}
+    
 </main>
 </body>
 </html>

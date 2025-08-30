@@ -1,0 +1,6 @@
+@template.layout(
+title = "Error",
+content = @`
+    <h1>An error occurred, try again later.</h1>
+    <a href="/">&larr; Go back to home page</a>
+`)
