@@ -51,7 +51,7 @@ echo "📝 Latest JAR detected: $LATEST_JAR"
 # ------------------------------------------------------------
 
 echo "🚀 Uploading files..."
-rsync -avz -e "ssh -i $KEY" "$LATEST_JAR" "$DB_PATH" root@$SERVER_IP:/root/
+rsync -avz -e "ssh -i $KEY" "$LATEST_JAR" root@$SERVER_IP:/root/
 check_success $? "Failed to upload files."
 echo "✅ Files uploaded"
 
