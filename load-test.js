@@ -5,6 +5,7 @@ import http from "k6/http"
 import { sleep } from "k6"
 
 export const options = {
+  gracefulRampDown: "5s",
   stages: [
     { duration: "30s", target: 20 },
     { duration: "1m30s", target: 10 },
