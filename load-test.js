@@ -15,5 +15,5 @@ export const options = {
 export default function () {
   const res = http.get("https://pedroreis.dev")
   check(res, { "status was 200": (r) => r.status == 200 })
-  sleep(1)
+  sleep(0.3)
 }
