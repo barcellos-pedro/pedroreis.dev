@@ -16,7 +16,7 @@ content = @`
         <a href="/projects">Check out my Portfolio Overview &rarr;</a>
 
         <section class="links">
-            @for(var link : links)
+            @for (var link : links)
                 <a href="${link.url()}" title="${link.title()}" target="_blank">
                     ${link.title()}
                 </a>
@@ -26,4 +26,3 @@ content = @`
         </section>
     </div>
 `)
-

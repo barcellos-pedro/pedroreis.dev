@@ -28,7 +28,13 @@
 
   .links {
     display: flex;
-    gap: 3em;
+    gap: 2em;
     align-items: center;
   }
+}
+
+.repo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
