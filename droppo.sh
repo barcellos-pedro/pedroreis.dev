@@ -51,7 +51,7 @@ echo "📝 Latest JAR detected: $LATEST_JAR"
 # ------------------------------------------------------------
 
 echo "🚀 Uploading files..."
-rsync -avz -e "ssh -i $KEY" "$LATEST_JAR" root@$SERVER_IP:/root/
+rsync -avz --progress -e "ssh -i $KEY" "$LATEST_JAR" root@$SERVER_IP:/root/
 check_success $? "Failed to upload files."
 echo "✅ Files uploaded"
 
@@ -62,6 +62,16 @@ echo "✅ Files uploaded"
 echo "▶️ Preparing remote directories and starting app..."
 
 ssh -i "$KEY" root@$SERVER_IP << EOF
+# Detect running server PID
+PID=\$(pgrep -f "java -jar /root/$(basename $LATEST_JAR)")
+
+if [ -n "\$PID" ]; then
+  echo "🛑 Killing old process with PID \$PID..."
+  kill -9 \$PID
+else
+  echo "ℹ️ No existing process found."
+fi
+
 # Start the app with nohup, redirecting logs
 nohup java -jar /root/$(basename $LATEST_JAR) > /root/app.log 2>&1 &
 EOF
