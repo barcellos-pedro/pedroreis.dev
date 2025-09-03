@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -20,7 +19,6 @@ import com.pedroreis.dev.model.Repo;
 public class BaseHttp {
     protected HttpClient getHttpClient() {
         return HttpClient.newBuilder()
-                .connectTimeout(Duration.ofMillis(500))
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .build();
     }
