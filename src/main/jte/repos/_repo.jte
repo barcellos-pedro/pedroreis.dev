@@ -1,6 +1,7 @@
-@import com.pedroreis.dev.Repo
-@import static com.pedroreis.dev.Templates.join
-@import static com.pedroreis.dev.Templates.date
+@import static com.pedroreis.dev.utils.Templates.join
+@import static com.pedroreis.dev.utils.Templates.date
+
+@import com.pedroreis.dev.model.Repo
 
 @param Repo repo
 

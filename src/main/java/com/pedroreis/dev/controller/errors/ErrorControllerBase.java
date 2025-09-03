@@ -1,4 +1,4 @@
-package com.pedroreis.dev;
+package com.pedroreis.dev.controller.errors;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

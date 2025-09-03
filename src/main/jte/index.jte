@@ -1,5 +1,6 @@
-@import com.pedroreis.dev.Link
+@import com.pedroreis.dev.model.Link
 @import java.util.List
+
 @param List<Link> links
 
 @template.layout(

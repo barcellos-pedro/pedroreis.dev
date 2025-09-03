@@ -1,4 +1,4 @@
-package com.pedroreis.dev;
+package com.pedroreis.dev.utils;
 
 import java.time.Instant;
 import java.time.ZoneId;

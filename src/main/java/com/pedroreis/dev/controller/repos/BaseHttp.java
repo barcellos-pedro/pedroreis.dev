@@ -1,4 +1,4 @@
-package com.pedroreis.dev;
+package com.pedroreis.dev.controller.repos;
 
 import static com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE;
 
@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.pedroreis.dev.model.Repo;
 
 public class BaseHttp {
     protected HttpClient getHttpClient() {

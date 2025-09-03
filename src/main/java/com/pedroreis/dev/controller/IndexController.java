@@ -1,4 +1,4 @@
-package com.pedroreis.dev;
+package com.pedroreis.dev.controller;
 
 import java.util.List;
 
@@ -9,14 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.pedroreis.dev.model.Link;
+import com.pedroreis.dev.request.IndexRequest;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-public class HomeController {
-    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+public class IndexController {
+    private static final Logger log = LoggerFactory.getLogger(IndexController.class);
     private final JdbcTemplate db;
 
-    public HomeController(JdbcTemplate db) {
+    public IndexController(JdbcTemplate db) {
         this.db = db;
     }
 
@@ -25,11 +28,11 @@ public class HomeController {
         incrementVisits(request);
         log.info("Total visits: {}", getTotalVisits());
         model.addAttribute("links", getLinks());
-        return "home";
+        return "index";
     }
 
     private void incrementVisits(HttpServletRequest request) {
-        var req = HomeRequest.of(request);
+        var req = IndexRequest.of(request);
         db.update("INSERT INTO visits (ip_address, user_agent, page_path) VALUES (?, ?, ?)",
                 req.ipAddress(), req.userAgent(), req.path());
     }

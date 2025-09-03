@@ -1,4 +1,4 @@
-package com.pedroreis.dev;
+package com.pedroreis.dev.controller.repos;
 
 import static java.net.http.HttpResponse.BodyHandlers.ofString;
 
@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.pedroreis.dev.model.Repo;
+
 @Controller
-public class RepoController extends BaseHttp {
-        private static final Logger log = LoggerFactory.getLogger(RepoController.class);
+public class IndexController extends BaseHttp {
+        private static final Logger log = LoggerFactory.getLogger(IndexController.class);
         public static final String URL = "https://api.github.com/users/barcellos-pedro/repos?sort=created&per_page=100&page=1";
 
         @GetMapping("/projects")
@@ -28,6 +30,6 @@ public class RepoController extends BaseHttp {
                 List<Repo> repos = parse(response);
                 model.addAttribute("repos", repos);
 
-                return "projects";
+                return "repos/index";
         }
 }

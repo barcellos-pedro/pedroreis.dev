@@ -1,4 +1,4 @@
-package com.pedroreis.dev;
+package com.pedroreis.dev.model;
 
 import java.time.Instant;
 import java.util.List;
