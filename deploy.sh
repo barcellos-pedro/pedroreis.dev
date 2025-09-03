@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ------------------------------------------------------------
-# Automated build & deploy script for Java + SQLite project
+#             Automated build & deploy script
 # ------------------------------------------------------------
 
 if [ -z "$1" ] || [ -z "$2" ]; then
@@ -9,13 +9,8 @@ if [ -z "$1" ] || [ -z "$2" ]; then
   exit 1
 fi
 
-# ------------------------------------------------------------
-# Variables & Functions
-# ------------------------------------------------------------
-
 SERVER_IP=$1
 KEY=$2
-DB_PATH=database.db
 
 check_success() {
   if [ $1 -ne 0 ]; then
@@ -67,7 +62,8 @@ PID=\$(pgrep -f "java -jar /root/$(basename $LATEST_JAR)")
 
 if [ -n "\$PID" ]; then
   echo "🛑 Killing old process with PID \$PID..."
-  kill -9 \$PID
+  kill \$PID
+  sleep 3 # wait for graceful shutdown
 else
   echo "ℹ️ No existing process found."
 fi
