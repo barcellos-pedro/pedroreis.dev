@@ -6,7 +6,9 @@
 @param Repo repo
 
 <div class="repo-header">
-    <p>${repo.name()}</p>
+    <a href="${repo.htmlUrl()}" target="_blank">
+        <p>${repo.name()}</p>
+    </a>
 
     <smal>
         <time datetime="${date(repo.createdAt())}">
@@ -15,12 +17,10 @@
     </small>
 </div>
 
-<small style="display: block">
-    Topics: ${join(repo.topics())}
-</small>
-
-<a href="${repo.htmlUrl()}" target="_blank">
-    Github page
-</a>
+@if (!repo.topics().isEmpty())
+    <small style="display: block">
+        Topics: ${join(repo.topics())}
+    </small>
+@endif
 
 <p>${repo.description()}</p>

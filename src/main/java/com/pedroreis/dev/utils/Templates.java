@@ -12,9 +12,8 @@ public class Templates {
     }
 
     public static String date(Instant date) {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        .withZone(ZoneId.systemDefault())
-        .format(date)
-        .toString();
+        return DateTimeFormatter.ofPattern("yy/MM/dd")
+                .withZone(ZoneId.systemDefault())
+                .format(date);
     }
 }
