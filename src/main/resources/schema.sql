@@ -1,18 +1,35 @@
--- Creat-Drop Tables --
 DROP TABLE IF EXISTS visits;
 DROP TABLE IF EXISTS links;
+DROP TABLE IF EXISTS repos;
+DROP TABLE IF EXISTS topics;
 
--- Create Tables --
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE IF NOT EXISTS visits (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    visit_timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
     page_path TEXT NOT NULL,
     ip_address TEXT,
-    user_agent TEXT
+    user_agent TEXT,
+    visit_timestamp TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS links (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	title TEXT NOT NULL,
 	url TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS repos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    htmlUrl TEXT NOT NULL,
+    description TEXT,
+    createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS topics(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    repo_id INTEGER NOT NULL,
+    FOREIGN KEY (repo_id) REFERENCES repos (id) ON DELETE CASCADE
 );
