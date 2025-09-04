@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico"> 
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> 
     
     <title>
         @if (title == null)
@@ -25,7 +25,7 @@
     <meta property="og:url" content="https://pedroreis.dev/">
     <meta property="og:title" content="My GitHub Projects Stats">
     <meta property="og:description" content="Web App to show my main projects stats from GitHub API.">
-    <meta property="og:image" content="https://pedroreis.dev/social-preview.jpg">
+    <meta property="og:image" content="https://pedroreis.dev/images/social-preview.jpg">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -33,12 +33,12 @@
     <meta name="twitter:title" content="My GitHub Projects Stats">
     <meta property="twitter:url" content="https://pedroreis.dev/">
     <meta name="twitter:description" content="Web App to show my main projects stats from GitHub API.">
-    <meta name="twitter:image" content="https://pedroreis.dev/social-preview.jpg">
+    <meta name="twitter:image" content="https://pedroreis.dev/images/social-preview.jpg">
 
     <!-- Scripts -->
-    <link rel="stylesheet" href="/simple.css">
-    <link rel="stylesheet" href="/style.css">
-    <script src="/script.js" defer></script>
+    <link rel="stylesheet" href="/css/simple.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/script.js" defer></script>
 </head>
 <body>
 <main>
