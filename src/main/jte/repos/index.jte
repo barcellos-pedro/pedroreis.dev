@@ -14,7 +14,7 @@ content = @`
     <a href="/" title="Go back">Go back</a>
 
     @for (var repo: repos)
-        <section id='${repo.id()}' class='repo'>
+        <section class='repo'>
             @template.repos._repo(repo)
         </section>
     @else
