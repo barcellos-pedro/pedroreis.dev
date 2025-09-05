@@ -12,18 +12,18 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
 public class AppErrorController extends ErrorControllerBase implements ErrorController {
-    private static final Logger log = LoggerFactory.getLogger(AppErrorController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AppErrorController.class);
 
     @GetMapping("/error")
     public String handleError(HttpServletRequest request) {
         Object errorCode = request.getAttribute(ERROR_STATUS_CODE);
 
         if (getHttpStatusOf(errorCode).equals(NOT_FOUND)) {
-            log.warn("[ERROR:404] Page not found");
+            LOG.warn("[ERROR:404] Page not found");
             return "errors/404";
         }
 
-        log.error("[ERROR:5xx] General error occurred", getExceptionOf(request));
+        LOG.error("[ERROR:5xx] General error occurred", getExceptionOf(request));
         return "errors/500";
     }
 }
