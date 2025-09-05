@@ -31,7 +31,19 @@ public class RepoController extends BaseHttp {
         }
 
         private List<Repo> getRepos() {
-                return jdbcTemplate.query("SELECT * FROM repos",
-                                (resultSet, rowNum) -> Repo.of(resultSet));
+                String query = """
+                        SELECT 
+                                r.id AS repo_id,
+                                r.name AS repo_name,
+                                r.htmlUrl,
+                                r.description,
+                                r.createdAt,
+                                t.id AS topic_id,
+                                t.topic_list,
+                                t.repo_id
+                        FROM repos r
+                        INNER JOIN topics t ON r.id = t.repo_id;
+                """;
+                return jdbcTemplate.query(query, (resultSet, rowNum) -> Repo.of(resultSet));
         }
 }

@@ -21,12 +21,13 @@ public record Repo(
                 List<String> topics) {
 
         public static Repo of(ResultSet resultSet) throws SQLException {
-                Instant date = DateUtils.getDate(resultSet.getString("createdAt"));
+                var createdAt = DateUtils.getDate(resultSet.getString("createdAt"));
+                var topics = List.of(resultSet.getString("topic_list").split(", "));
 
-                return new Repo(resultSet.getString("name"),
+                return new Repo(resultSet.getString("repo_name"),
                                 resultSet.getString("htmlUrl"),
                                 resultSet.getString("description"),
-                                date,
-                                List.of()); // TODO: #5 Get Topics from Inner Join
+                                createdAt,
+                                topics);
         }
 }

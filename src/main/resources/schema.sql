@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS repos (
 
 CREATE TABLE IF NOT EXISTS topics(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+    topic_list TEXT NOT NULL, -- 'html, css, js, etc' --
     repo_id INTEGER NOT NULL,
     FOREIGN KEY (repo_id) REFERENCES repos (id) ON DELETE CASCADE
 );
