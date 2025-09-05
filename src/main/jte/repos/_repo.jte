@@ -10,7 +10,7 @@
         <p>${repo.name()}</p>
     </a>
 
-    <smal>
+    <small>
         <time datetime="${date(repo.createdAt())}">
             ${date(repo.createdAt())}
         </time>
