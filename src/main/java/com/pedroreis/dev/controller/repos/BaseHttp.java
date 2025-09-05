@@ -4,7 +4,6 @@ import static com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -17,24 +16,16 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.pedroreis.dev.model.Repo;
 
 public class BaseHttp {
-    protected HttpClient getHttpClient() {
-        return HttpClient.newBuilder()
-                .followRedirects(HttpClient.Redirect.NORMAL)
-                .build();
-    }
+    public static final String BASE_URL = "https://api.github.com";
 
-    protected HttpRequest getRequest(String url) throws URISyntaxException {
+    public static HttpRequest getRequest(String path) throws URISyntaxException {
         return HttpRequest.newBuilder()
-                .uri(getUri(url))
+                .uri(new URI(BASE_URL + path))
                 .GET()
                 .build();
     }
 
-    protected URI getUri(String url) throws URISyntaxException {
-        return new URI(url);
-    }
-
-    protected List<Repo> parse(HttpResponse<String> response) throws JsonProcessingException, JsonMappingException {
+    public static List<Repo> parse(HttpResponse<String> response) throws JsonProcessingException, JsonMappingException {
         return new ObjectMapper()
                 .registerModule(new JavaTimeModule())
                 .setPropertyNamingStrategy(SNAKE_CASE)
