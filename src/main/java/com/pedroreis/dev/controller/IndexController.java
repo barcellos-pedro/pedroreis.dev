@@ -16,33 +16,38 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class IndexController {
-    private static final Logger log = LoggerFactory.getLogger(IndexController.class);
-    private final JdbcTemplate db;
+    private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
+    private final JdbcTemplate jdbcTemplate;
 
-    public IndexController(JdbcTemplate db) {
-        this.db = db;
+    public IndexController(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @GetMapping("/")
     public String index(HttpServletRequest request, Model model) {
         incrementVisits(request);
-        log.info("Total visits: {}", getTotalVisits());
-        model.addAttribute("links", getLinks());
+
+        var links = getLinks();
+
+        LOG.info("[DB:Visits]: {}", getTotalVisits());
+        LOG.info("[DB:Links]: {}", links.size());
+
+        model.addAttribute("links", links);
         return "index";
     }
 
     private void incrementVisits(HttpServletRequest request) {
         var req = IndexRequest.of(request);
-        db.update("INSERT INTO visits (ip_address, user_agent, page_path) VALUES (?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO visits (ip_address, user_agent, page_path) VALUES (?, ?, ?)",
                 req.ipAddress(), req.userAgent(), req.path());
     }
 
     private String getTotalVisits() {
-        return db.queryForObject("SELECT count(*) FROM visits", String.class);
+        return jdbcTemplate.queryForObject("SELECT count(*) FROM visits", String.class);
     }
 
     private List<Link> getLinks() {
-        return db.query("SELECT * FROM links",
-                (rs, rowNow) -> new Link(rs.getString("title"), rs.getString("url")));
+        return jdbcTemplate.query("SELECT * FROM links",
+                (resultSet, rowNuw) -> Link.of(resultSet));
     }
 }
