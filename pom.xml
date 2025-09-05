@@ -40,11 +40,6 @@
             <artifactId>jte-spring-boot-starter-3</artifactId>
             <version>${jte.version}</version>
         </dependency>
-        <dependency>
-            <groupId>gg.jte</groupId>
-            <artifactId>jte-watcher</artifactId>
-            <version>${jte.version}</version>
-        </dependency>
 
         <!-- Lib to help Jackson parse Timestamps -->
         <dependency>
