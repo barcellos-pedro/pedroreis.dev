@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pedroreis.dev.utils.Utils;
+import com.pedroreis.dev.utils.DateUtils;
 
 /// Repository
 /// - name      = {repo_name}
@@ -21,7 +21,7 @@ public record Repo(
                 List<String> topics) {
 
         public static Repo of(ResultSet resultSet) throws SQLException {
-                Instant date = Utils.getDate(resultSet.getString("createdAt"));
+                Instant date = DateUtils.getDate(resultSet.getString("createdAt"));
 
                 return new Repo(resultSet.getString("name"),
                                 resultSet.getString("htmlUrl"),

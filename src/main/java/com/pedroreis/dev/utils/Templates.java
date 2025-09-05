@@ -12,7 +12,7 @@ public class Templates {
     }
 
     public static String date(Instant date) {
-        return DateTimeFormatter.ofPattern("yy/MM/dd")
+        return DateTimeFormatter.ofPattern(DateUtils.DATE_PATTERN)
                 .withZone(ZoneId.systemDefault())
                 .format(date);
     }
