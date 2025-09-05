@@ -1,6 +1,3 @@
-@import static com.pedroreis.dev.utils.Templates.join
-@import static com.pedroreis.dev.utils.Templates.date
-
 @import java.util.List
 @import com.pedroreis.dev.model.Repo
 
@@ -15,7 +12,7 @@ content = @`
 
     @for (var repo: repos)
         <section class='repo'>
-            @template.repos._repo(repo)
+            @template.repos._repo(repo=repo)
         </section>
     @else
         <p>Projects are under maintenance</p>
