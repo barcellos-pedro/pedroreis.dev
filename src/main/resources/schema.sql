@@ -3,6 +3,11 @@ DROP TABLE IF EXISTS links;
 DROP TABLE IF EXISTS repos;
 DROP TABLE IF EXISTS topics;
 
+DELETE FROM sqlite_sequence WHERE name = 'visits';
+DELETE FROM sqlite_sequence WHERE name = 'links';
+DELETE FROM sqlite_sequence WHERE name = 'repos';
+DELETE FROM sqlite_sequence WHERE name = 'topics';
+
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS visits (
