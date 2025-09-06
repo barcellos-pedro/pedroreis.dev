@@ -1,7 +1,8 @@
 package com.pedroreis.dev.controller;
 
-import java.util.List;
-
+import com.pedroreis.dev.model.Link;
+import com.pedroreis.dev.request.IndexRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,10 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.pedroreis.dev.model.Link;
-import com.pedroreis.dev.request.IndexRequest;
-
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class IndexController {
