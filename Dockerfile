@@ -1,7 +1,7 @@
-FROM openjdk:21-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 
-ARG JAR_FILE=target/*.jar
+WORKDIR /app
+COPY target/dev-1.0.0.jar app.jar
+COPY database.db database.db
 
-COPY ${JAR_FILE} app.jar
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/app/app.jar"]
