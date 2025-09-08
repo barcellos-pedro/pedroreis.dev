@@ -1,5 +1,5 @@
-@import static com.pedroreis.dev.utils.Templates.join
-@import static com.pedroreis.dev.utils.Templates.date
+@import static com.pedroreis.dev.utils.Template.join
+@import static com.pedroreis.dev.utils.Template.date
 
 @import com.pedroreis.dev.model.Repo
 

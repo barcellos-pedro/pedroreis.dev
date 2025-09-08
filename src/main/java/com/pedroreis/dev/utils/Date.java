@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-public class DateUtils {
+public class Date {
     public static final String DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
     public static final ZoneId DATE_ZONE = ZoneId.of("America/Sao_Paulo");
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_PATTERN);

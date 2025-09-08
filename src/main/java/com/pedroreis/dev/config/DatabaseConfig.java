@@ -11,9 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.net.http.HttpClient;
+import java.net.http.HttpResponse;
 import java.util.List;
-
-import static java.net.http.HttpResponse.BodyHandlers.ofString;
 
 @Configuration
 public class DatabaseConfig {
@@ -35,7 +34,7 @@ public class DatabaseConfig {
     CommandLineRunner seedTables(JdbcTemplate jdbcTemplate) {
         return args -> {
             var request = BaseHttp.getRequest(PATH);
-            var response = httpClient.send(request, ofString());
+            var response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             List<Repo> repos = BaseHttp.parse(response);
 
             LOG.info("[Config:DB] GitHub API: Status code: {} | Total Repos: {}",
