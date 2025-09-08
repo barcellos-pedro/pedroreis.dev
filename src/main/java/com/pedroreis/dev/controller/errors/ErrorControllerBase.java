@@ -14,15 +14,13 @@ public class ErrorControllerBase {
     }
 
     protected static HttpStatus getHttpStatusOf(Object errorCode) {
-        if (errorCode == null) return INTERNAL_SERVER_ERROR;
+        if (errorCode == null)
+            return INTERNAL_SERVER_ERROR;
+
         return isNotFoundError(errorCode) ? NOT_FOUND : INTERNAL_SERVER_ERROR;
     }
 
     protected static boolean isNotFoundError(Object errorCode) {
-        return isNotFoundError(errorCode.toString());
-    }
-
-    protected static boolean isNotFoundError(String errorCode) {
-        return parseInt(errorCode) == NOT_FOUND.value();
+        return parseInt(errorCode.toString()) == NOT_FOUND.value();
     }
 }
