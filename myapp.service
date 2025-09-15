@@ -1,0 +1,23 @@
+# systemd
+
+[Unit]
+Description=My Java App
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root
+
+# Start your JAR
+ExecStart=/usr/bin/java -jar /root/dev-1.0.0.jar
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=append:/root/app.log
+StandardError=append:/root/app.log
+
+[Install]
+WantedBy=multi-user.target
