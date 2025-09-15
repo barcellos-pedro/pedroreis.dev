@@ -51,27 +51,17 @@ check_success $? "Failed to upload files."
 echo "✅ Files uploaded"
 
 # ------------------------------------------------------------
-# Step 4 - Access remote server and start app
+# Step 4 - Restart systemd service
 # ------------------------------------------------------------
 
-echo "▶️ Preparing remote directories and starting app..."
+echo "🔄 Restarting service on remote server..."
 
 ssh -i "$KEY" root@$SERVER_IP << EOF
-# Detect running server PID
-PID=\$(pgrep -f "java -jar /root/$(basename $LATEST_JAR)")
-
-if [ -n "\$PID" ]; then
-  echo "🛑 Killing old process with PID \$PID..."
-  kill \$PID
-  sleep 3 # wait for graceful shutdown
-else
-  echo "ℹ️ No existing process found."
-fi
-
-# Start the app with nohup, redirecting logs
-nohup java -jar /root/$(basename $LATEST_JAR) > /root/app.log 2>&1 &
+systemctl daemon-reload
+systemctl restart myapp.service
+systemctl status myapp.service --no-pager -l
 EOF
 
-check_success $? "Failed to start application."
+check_success $? "Failed to restart application."
 
 echo "✅ Deployment completed successfully"
