@@ -19,4 +19,4 @@ INSERT INTO links (title, url)
 VALUES ('Twitter', 'https://x.com/pedroreis_io');
 
 INSERT INTO links (title, url)
-VALUES ('E-mail', 'mailto:pedrobarcellosdosreis@gmail.com');
+VALUES ('Mail', 'mailto:pedrobarcellosdosreis@gmail.com');
