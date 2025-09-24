@@ -27,7 +27,7 @@ public class Link extends ActiveRecord {
     }
 
     public static Link of(ResultSet resultSet) throws SQLException {
-        List<String> fields = Schema.of(resultSet).strings("title", "url");
+        List<String> fields = Schema.of(resultSet).getStrings("title", "url");
         return new Link(fields);
     }
 
