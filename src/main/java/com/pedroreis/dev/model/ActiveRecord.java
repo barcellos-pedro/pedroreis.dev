@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActiveRecord {
     protected static JdbcTemplate jdbcTemplate;
+    
+    protected String id;
 
     public ActiveRecord() {
     }
@@ -14,5 +16,13 @@ public class ActiveRecord {
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         ActiveRecord.jdbcTemplate = jdbcTemplate;
+    }
+
+    public String id() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
