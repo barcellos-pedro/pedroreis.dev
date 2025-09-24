@@ -15,7 +15,15 @@ import java.util.List;
 import static com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE;
 
 public class BaseHttp {
-    public static final String BASE_URL = "https://api.github.com";
+    public static final JavaTimeModule TIME_MODULE;
+    public static final ObjectMapper MAPPER;
+    public static final String BASE_URL;
+
+    static {
+        BASE_URL = "https://api.github.com";
+        TIME_MODULE = new JavaTimeModule();
+        MAPPER = new ObjectMapper();
+    }
 
     public static HttpRequest getRequest(String path) throws URISyntaxException {
         return HttpRequest.newBuilder()
@@ -25,8 +33,7 @@ public class BaseHttp {
     }
 
     public static List<Repo> parse(HttpResponse<String> response) throws JsonProcessingException {
-        return new ObjectMapper()
-                .registerModule(new JavaTimeModule())
+        return MAPPER.registerModule(TIME_MODULE)
                 .setPropertyNamingStrategy(SNAKE_CASE)
                 .readValue(response.body(), new TypeReference<>() {
                 });
