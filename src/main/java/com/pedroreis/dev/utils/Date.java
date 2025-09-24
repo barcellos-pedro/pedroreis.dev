@@ -15,4 +15,10 @@ public class Date {
                 .atZone(DATE_ZONE)
                 .toInstant();
     }
+
+    public static String getDate(Instant date) {
+        return DateTimeFormatter.ofPattern(DATE_PATTERN)
+                .withZone(DATE_ZONE)
+                .format(date);
+    }
 }

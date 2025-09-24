@@ -1,8 +1,6 @@
 package com.pedroreis.dev.utils;
 
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Template {
@@ -11,8 +9,6 @@ public class Template {
     }
 
     public static String date(Instant date) {
-        return DateTimeFormatter.ofPattern(Date.DATE_PATTERN)
-                .withZone(ZoneId.systemDefault())
-                .format(date);
+        return Date.getDate(date);
     }
 }
