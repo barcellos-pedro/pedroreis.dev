@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
-import java.util.Collections;
 import java.util.List;
 
 /// Repository model
@@ -27,6 +26,7 @@ public class Repo extends ActiveRecord {
     private String description;
     private Instant createdAt;
     private List<String> topics;
+
     public static final String REPOS_WITH_TOPICS_QUERY = "SELECT r.id AS repo_id, r.name AS repo_name, r.htmlUrl, r.description, r.createdAt, t.id AS topic_id, t.topic_list, t.repo_id FROM repos r INNER JOIN topics t ON r.id = t.repo_id;";
 
     public Repo() {
@@ -41,16 +41,18 @@ public class Repo extends ActiveRecord {
     }
 
     public Repo(List<String> fields) {
-        this.createdAt = Date.getDate(fields.get(0));
-        this.description = fields.get(1);
-        this.topics = fields.get(2).isBlank() ? Collections.emptyList() : List.of(fields.get(2).split(", "));
-        this.name = fields.get(3);
-        this.htmlUrl = fields.get(4);
+        var topics = fields.get(5);
+        this.id = fields.get(0);
+        this.name = fields.get(1);
+        this.htmlUrl = fields.get(2);
+        this.description = fields.get(3);
+        this.createdAt = Date.getDate(fields.get(4));
+        this.topics = topics.isBlank() ? List.of() : List.of(topics.split(", "));
     }
 
     public static Repo of(ResultSet resultSet) throws SQLException {
         List<String> fields = Schema.of(resultSet)
-                .strings("createdAt", "description", "topic_list", "repo_name", "htmlUrl");
+                .strings("repo_id", "repo_name", "htmlUrl", "description", "createdAt", "topic_list");
         return new Repo(fields);
     }
 
@@ -58,13 +60,21 @@ public class Repo extends ActiveRecord {
         return jdbcTemplate.query(REPOS_WITH_TOPICS_QUERY, (resultSet, rowNum) -> Repo.of(resultSet));
     }
 
-    public static Integer getId(Repo repo) {
-        return jdbcTemplate.queryForObject("SELECT id FROM repos WHERE name = ?", Integer.class, repo.name());
+    public static String getId(Repo repo) {
+        return jdbcTemplate.queryForObject("SELECT id FROM repos WHERE name = ?", String.class, repo.name());
     }
 
     public static void create(Repo repo) {
         jdbcTemplate.update("INSERT INTO repos (name, htmlUrl, description) VALUES (?, ?, ?)",
                 repo.name(), repo.htmlUrl(), repo.description());
+    }
+
+    public void save() {
+        jdbcTemplate.update("INSERT INTO repos (name, htmlUrl, description) VALUES (?, ?, ?)",
+                name(), htmlUrl(), description());
+
+        var id = Repo.getId(this);
+        Topic.create(topics, id);
     }
 
     public String name() {
@@ -105,5 +115,12 @@ public class Repo extends ActiveRecord {
 
     public void setTopics(List<String> topics) {
         this.topics = topics;
+    }
+
+    @Override
+    public String toString() {
+        return "Repo [id = " + id + ", name=" + name + ", htmlUrl=" + htmlUrl +
+                ", description=" + description + ", createdAt="
+                + createdAt + ", topics=" + topics + "]";
     }
 }
