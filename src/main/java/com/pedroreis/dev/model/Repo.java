@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 
 /// Repository model
 /// Used to map the JSON response from GitHub API
@@ -27,6 +28,15 @@ public class Repo extends ActiveRecord {
     private Instant createdAt;
     private List<String> topics;
 
+    public static final String[] attributes = {
+            "repo_id",
+            "repo_name",
+            "htmlUrl",
+            "description",
+            "createdAt",
+            "topic_list"
+    };
+
     public static final String REPOS_WITH_TOPICS_QUERY = "SELECT r.id AS repo_id, r.name AS repo_name, r.htmlUrl, r.description, r.createdAt, t.id AS topic_id, t.topic_list, t.repo_id FROM repos r INNER JOIN topics t ON r.id = t.repo_id;";
 
     public Repo() {
@@ -40,20 +50,24 @@ public class Repo extends ActiveRecord {
         this.description = description;
     }
 
-    public Repo(List<String> fields) {
-        var topics = fields.get(5);
-        this.id = fields.get(0);
-        this.name = fields.get(1);
-        this.htmlUrl = fields.get(2);
-        this.description = fields.get(3);
-        this.createdAt = Date.getDate(fields.get(4));
-        this.topics = topics.isBlank() ? List.of() : List.of(topics.split(", "));
+    public Repo(Schema schema) {
+        Map<String, String> attributes = schema.attributes();
+        this.id = attributes.get("repo_id");
+        this.name = attributes.get("repo_name");
+        this.htmlUrl = attributes.get("htmlUrl");
+        this.description = attributes.get("description");
+        this.createdAt = Date.getDate(attributes.get("createdAt"));
+        this.topics = attributes.get("topic_list").isBlank() ? List.of()
+                : List.of(attributes.get("topic_list").split(", "));
     }
 
     public static Repo of(ResultSet resultSet) throws SQLException {
-        List<String> fields = Schema.of(resultSet)
-                .strings("repo_id", "repo_name", "htmlUrl", "description", "createdAt", "topic_list");
-        return new Repo(fields);
+        Schema schema = new Schema.Builder()
+                .attributes(attributes)
+                .resultSet(resultSet)
+                .build();
+
+        return new Repo(schema);
     }
 
     public static List<Repo> all() {
