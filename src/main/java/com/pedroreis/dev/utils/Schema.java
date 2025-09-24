@@ -30,7 +30,8 @@ public class Schema {
         var result = new ArrayList<String>(fields.length);
 
         for (var field : fields) {
-            result.add(string(field));
+            var value = string(field);
+            result.add(value);
         }
 
         return result;
