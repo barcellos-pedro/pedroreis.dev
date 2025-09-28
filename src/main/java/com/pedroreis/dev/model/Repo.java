@@ -37,8 +37,6 @@ public class Repo extends ActiveRecord {
             "topic_list"
     };
 
-    public static final String REPOS_WITH_TOPICS_QUERY = "SELECT r.id AS repo_id, r.name AS repo_name, r.htmlUrl, r.description, r.createdAt, t.id AS topic_id, t.topic_list, t.repo_id FROM repos r INNER JOIN topics t ON r.id = t.repo_id;";
-
     public Repo() {
     }
 
@@ -50,32 +48,63 @@ public class Repo extends ActiveRecord {
         this.description = description;
     }
 
-    public Repo(Schema schema) {
-        Map<String, String> attributes = schema.attributes();
-        this.id = attributes.get("repo_id");
-        this.name = attributes.get("repo_name");
-        this.htmlUrl = attributes.get("htmlUrl");
-        this.description = attributes.get("description");
-        this.createdAt = Date.getDate(attributes.get("createdAt"));
-        this.topics = attributes.get("topic_list").isBlank() ? List.of()
-                : List.of(attributes.get("topic_list").split(", "));
+    public static Repo of(ResultSet resultSet) throws SQLException {
+        var schema = getSchema(resultSet);
+        var attributes = schema.attributes();
+
+        var repo = new Repo();
+
+        repo.id = attributes.get("repo_id");
+        repo.name = attributes.get("repo_name");
+        repo.htmlUrl = attributes.get("htmlUrl");
+        repo.description = attributes.get("description");
+        repo.createdAt = getDate(attributes);
+        repo.topics = getTopics(attributes);
+
+        return repo;
     }
 
-    public static Repo of(ResultSet resultSet) throws SQLException {
-        Schema schema = new Schema.Builder()
+    private static Instant getDate(Map<String, String> attributes) {
+        return Date.getDate(attributes.get("createdAt"));
+    }
+
+    private static List<String> getTopics(Map<String, String> attributes) {
+        String topics = attributes.get("topic_list");
+
+        if (topics.isBlank())
+            return List.of();
+
+        return List.of(topics.split(", "));
+    }
+
+    private static Schema getSchema(ResultSet resultSet) {
+        return new Schema.Builder()
                 .attributes(attributes)
                 .resultSet(resultSet)
                 .build();
-
-        return new Repo(schema);
     }
 
     public static List<Repo> all() {
-        return jdbcTemplate.query(REPOS_WITH_TOPICS_QUERY, (resultSet, rowNum) -> Repo.of(resultSet));
+        return jdbcTemplate.query("""
+                SELECT r.id AS repo_id,
+                    r.name AS repo_name,
+                    r.htmlUrl,
+                    r.description,
+                    r.createdAt,
+                    t.id AS topic_id,
+                    t.topic_list,
+                    t.repo_id
+                FROM repos r
+                INNER JOIN topics t ON r.id = t.repo_id
+                """, (resultSet, rowNum) -> Repo.of(resultSet));
     }
 
     public static String getId(Repo repo) {
         return jdbcTemplate.queryForObject("SELECT id FROM repos WHERE name = ?", String.class, repo.name());
+    }
+
+    public String getId() {
+        return jdbcTemplate.queryForObject("SELECT id FROM repos WHERE name = ?", String.class, name());
     }
 
     public static void create(Repo repo) {
@@ -87,8 +116,7 @@ public class Repo extends ActiveRecord {
         jdbcTemplate.update("INSERT INTO repos (name, htmlUrl, description) VALUES (?, ?, ?)",
                 name(), htmlUrl(), description());
 
-        var id = Repo.getId(this);
-        Topic.create(topics, id);
+        Topic.create(topics, getId());
     }
 
     public String name() {
@@ -133,8 +161,7 @@ public class Repo extends ActiveRecord {
 
     @Override
     public String toString() {
-        return "Repo [id = " + id + ", name=" + name + ", htmlUrl=" + htmlUrl +
-                ", description=" + description + ", createdAt="
-                + createdAt + ", topics=" + topics + "]";
+        return "Repo [id= %s, name=%s, htmlUrl=%s, description=%s, createdAt=%s, topics=%s]"
+                .formatted(id, name, htmlUrl, description, createdAt, topics);
     }
 }
