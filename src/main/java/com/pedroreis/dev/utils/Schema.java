@@ -19,12 +19,12 @@ public class Schema {
     public Schema(Builder builder) {
         this.resultSet = builder.resultSet;
 
-        var values = getStrings(builder.attributes);
-        
+        List<String> values = getStrings(builder.attributes);
+
         for (var i = 0; i < builder.attributes.length; i++) {
             var key = builder.attributes[i];
             var value = values.get(i);
-            attributes.put(key, value);
+            this.attributes.put(key, value);
         }
     }
 
@@ -57,6 +57,7 @@ public class Schema {
     }
 
     public static class Builder {
+
         private ResultSet resultSet;
         private String[] attributes;
 
