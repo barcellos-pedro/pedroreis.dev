@@ -6,8 +6,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ActiveRecord {
+
     protected static JdbcTemplate jdbcTemplate;
-    
+
     protected String id;
 
     public ActiveRecord() {
