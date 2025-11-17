@@ -38,7 +38,9 @@
     <!-- Scripts -->
     <link rel="stylesheet" href="/css/simple.css">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/script.js" defer></script>
+
+    <script type="module" src="/js/hotwired-turbo.js" defer></script>
+    <script type="module" src="/js/script.js" defer></script>
 </head>
 <body>
 <main>

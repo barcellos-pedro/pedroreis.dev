@@ -14,7 +14,7 @@ content = @`
             <p>Software Engineer</p>
         </h3>
 
-        <a href="/projects">Check out my Portfolio Overview &rarr;</a>
+        <a href="/projects">Check out my projects &rarr;</a>
 
         <section class="links">
             @for (var link : links)

@@ -5,18 +5,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActiveRecord {
-
+public abstract class BaseModel {
     protected static JdbcTemplate jdbcTemplate;
-
     protected String id;
 
-    public ActiveRecord() {
+    public BaseModel() {
     }
 
     @Autowired
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        ActiveRecord.jdbcTemplate = jdbcTemplate;
+    public void setJdbcTemplate(JdbcTemplate template) {
+        jdbcTemplate = template;
     }
 
     public String id() {

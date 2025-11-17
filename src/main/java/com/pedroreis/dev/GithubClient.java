@@ -1,17 +1,17 @@
 package com.pedroreis.dev;
 
-import com.pedroreis.dev.controller.repos.BaseHttp;
+import com.pedroreis.dev.controller.repos.BaseController;
 import com.pedroreis.dev.model.Repo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import static java.net.http.HttpResponse.BodyHandlers.ofString;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.util.List;
+
+import static java.net.http.HttpResponse.BodyHandlers.ofString;
 
 @Component
 public class GithubClient {
@@ -24,9 +24,9 @@ public class GithubClient {
     }
 
     public List<Repo> fetchRepos() throws IOException, InterruptedException, URISyntaxException {
-        var request = BaseHttp.getRequest(PATH);
+        var request = BaseController.getRequest(PATH);
         var response = httpClient.send(request, ofString());
         LOG.info("[Client:Github] GitHub API: Status code: {}", response.statusCode());
-        return BaseHttp.parse(response);
+        return BaseController.parse(response);
     }
 }

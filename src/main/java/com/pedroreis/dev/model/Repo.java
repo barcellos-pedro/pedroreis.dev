@@ -21,14 +21,14 @@ import java.util.Map;
 /// - htmlUrl   = repository GitHub page
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public class Repo extends ActiveRecord {
+public class Repo extends BaseModel {
     private String name;
     private String htmlUrl;
     private String description;
     private Instant createdAt;
     private List<String> topics;
 
-    public static final String[] attributes = {
+    private static final String[] ATTRIBUTES = {
             "repo_id",
             "repo_name",
             "htmlUrl",
@@ -79,7 +79,7 @@ public class Repo extends ActiveRecord {
 
     private static Schema getSchema(ResultSet resultSet) {
         return new Schema.Builder()
-                .attributes(attributes)
+                .attributes(ATTRIBUTES)
                 .resultSet(resultSet)
                 .build();
     }

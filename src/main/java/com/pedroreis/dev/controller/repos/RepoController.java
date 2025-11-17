@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class RepoController extends BaseHttp {
+public class RepoController extends BaseController {
     private static final Logger LOG = LoggerFactory.getLogger(RepoController.class);
 
     @GetMapping("/projects")

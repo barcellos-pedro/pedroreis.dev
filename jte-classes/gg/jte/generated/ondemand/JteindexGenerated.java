@@ -9,7 +9,7 @@ public final class JteindexGenerated {
 		jteOutput.writeContent("\n");
 		gg.jte.generated.ondemand.JtelayoutGenerated.render(jteOutput, jteHtmlInterceptor, "Home", new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\n    <div class=\"bio\">\n        <img src=\"https://avatars.githubusercontent.com/u/33139500?v=4\" alt=\"Pedro's profile image\">\n\n        <h3>\n            <p>Pedro Barcellos dos Reis</p>\n            <p>Software Engineer</p>\n        </h3>\n\n        <a href=\"/projects\">Check out my Portfolio Overview &rarr;</a>\n\n        <section class=\"links\">\n            ");
+				jteOutput.writeContent("\n    <div class=\"bio\">\n        <img src=\"https://avatars.githubusercontent.com/u/33139500?v=4\" alt=\"Pedro's profile image\">\n\n        <h3>\n            <p>Pedro Barcellos dos Reis</p>\n            <p>Software Engineer</p>\n        </h3>\n\n        <a href=\"/projects\">Check out my projects &rarr;</a>\n\n        <section class=\"links\">\n            ");
 				boolean __jte_for_loop_entered_1 = false;
 				for (var link : links) {
 					__jte_for_loop_entered_1 = true;

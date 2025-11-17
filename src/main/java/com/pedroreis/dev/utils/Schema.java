@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Schema {
-
     private final ResultSet resultSet;
-    private Map<String, String> attributes = new HashMap<>();
+    private final Map<String, String> attributes = new HashMap<>();
 
     public Schema(ResultSet resultSet) {
         this.resultSet = resultSet;
@@ -35,8 +34,7 @@ public class Schema {
     public String getString(String attribute) {
         try {
             return resultSet.getString(attribute);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException __) {
             return "";
         }
     }

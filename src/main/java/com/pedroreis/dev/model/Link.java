@@ -1,17 +1,18 @@
 package com.pedroreis.dev.model;
 
+import com.pedroreis.dev.utils.Schema;
+import org.springframework.stereotype.Component;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-import com.pedroreis.dev.utils.Schema;
-
 @Component
-public class Link extends ActiveRecord {
+public class Link extends BaseModel {
     private String title;
     private String url;
+
+    private static final String[] ATTRIBUTES = {"title", "url"};
 
     public Link() {
     }
@@ -27,7 +28,7 @@ public class Link extends ActiveRecord {
     }
 
     public static Link of(ResultSet resultSet) throws SQLException {
-        List<String> fields = Schema.of(resultSet).getStrings("title", "url");
+        List<String> fields = Schema.of(resultSet).getStrings(ATTRIBUTES);
         return new Link(fields);
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 
 import static com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE;
 
-public class BaseHttp {
+public abstract class BaseController {
     public static final JavaTimeModule TIME_MODULE;
     public static final ObjectMapper MAPPER;
     public static final String BASE_URL;

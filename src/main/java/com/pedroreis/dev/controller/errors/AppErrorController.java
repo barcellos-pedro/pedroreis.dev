@@ -4,10 +4,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static jakarta.servlet.RequestDispatcher.ERROR_STATUS_CODE;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Controller
@@ -16,9 +16,9 @@ public class AppErrorController extends ErrorControllerBase implements ErrorCont
 
     @GetMapping("/error")
     public String handleError(HttpServletRequest request) {
-        Object errorCode = request.getAttribute(ERROR_STATUS_CODE);
+        HttpStatus httpStatus = getHttpStatusOf(request);
 
-        if (getHttpStatusOf(errorCode).equals(NOT_FOUND)) {
+        if (httpStatus.equals(NOT_FOUND)) {
             LOG.warn("[ERROR:404] Page not found");
             return "errors/404";
         }

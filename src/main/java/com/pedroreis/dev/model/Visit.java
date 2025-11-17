@@ -1,15 +1,16 @@
 package com.pedroreis.dev.model;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 @Component
-public class Visit extends ActiveRecord {
+public class Visit extends BaseModel {
     private String path;
     private String userAgent;
     private String ipAddress;
+
+    private static final String[] ATTRIBUTES = {"path", "userAgent", "ipAddress"};
 
     public Visit() {
     }
