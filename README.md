@@ -6,7 +6,7 @@ Portfolio Java web application that displays project statistics, with a traditio
 
 ## Tech Stack
 
-- Java 21
+- Java 25
 
 - Spring Boot 3.5.7
 
@@ -22,7 +22,7 @@ Build & Deployment:
 
 - Maven (build tool and dependency management)
 
-- GitHub Actions for CI/CD (builds with JDK 21)
+- GitHub Actions for CI/CD
 Additional Libraries:
 
 - Jackson (JSON processing with JSR310 datetime support)
