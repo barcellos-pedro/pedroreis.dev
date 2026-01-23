@@ -44,3 +44,4 @@ web.iml
 
 # JTE
 /jte-classes/**/*
+database.db

@@ -15,6 +15,8 @@ Portfolio Java web application that displays project statistics, with a traditio
 - Spring JDBC (database access)
 
 - SQLite (lightweight file-based database)
+
+- `database.db` is the local database file, and it is not versioned.
 Templating:
 
 - JTE (Java Template Engine) 3.2.1 for server-side HTML rendering
