@@ -19,14 +19,14 @@ git clone https://github.com/barcellos-pedro/api-transferencia.git
 cd api-transferencia
 ```
 
-3. **Compile and run**:
+1. **Compile and run**:
 
 ```bash
 mvn spring-boot:run
 ```
 
-4. **Access the API**: The application will be available at `http://localhost:8080`.
-5. **Interactive Documentation (Swagger)**: Access `http://localhost:8080/swagger-ui/index.html` to test the endpoints
+1. **Access the API**: The application will be available at `http://localhost:8080`.
+2. **Interactive Documentation (Swagger)**: Access `http://localhost:8080/swagger-ui/index.html` to test the endpoints
    in the browser
 
 ## Main Endpoints
@@ -102,4 +102,3 @@ The project was structured using [Spring Initializr](https://start.spring.io).
 Below, the main components selected to meet the API requirements:
 
 <img width="1710" height="654" alt="image" src="https://github.com/user-attachments/assets/35a7e8da-9396-4ad3-944b-87a0fa95573a" />
-
