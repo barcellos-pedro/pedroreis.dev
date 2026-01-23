@@ -45,3 +45,7 @@ web.iml
 # JTE
 /jte-classes/**/*
 database.db
+
+# Generated build artifacts
+BOOT-INF/
+META-INF/
