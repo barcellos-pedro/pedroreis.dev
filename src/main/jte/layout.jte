@@ -12,7 +12,7 @@
         @if (title == null)
             pedroreis.dev
         @else
-            ${title}
+            pedroreis.dev - ${title}
         @endif
     </title>
 

@@ -43,4 +43,5 @@ web.iml
 .vscode
 
 # JTE
-/jte-classes/
+/jte-classes/**/*
+database.db
